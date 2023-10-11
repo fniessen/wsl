@@ -1,1 +1,9 @@
+#!/usr/bin/env bash
+
+# Check if docopts command is available.
+if ! command -v docopts.exe > /dev/null 2>&1; then
+    printf >&2 'Error: docopts.exe command not found.\n'
+    exit 2
+fi
+
 docopts.exe "$@"
