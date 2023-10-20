@@ -1,0 +1,6 @@
+# Aliases for WSL.
+alias c:='cd /mnt/c'
+alias d:='cd /mnt/d'
+alias explorer='explorer.exe'
+
+# Additional aliases and configurations can be added here.
