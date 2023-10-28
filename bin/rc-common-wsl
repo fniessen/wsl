@@ -1,3 +1,5 @@
+wsl/bin/rc-common-wsl
+
 # Aliases for WSL.
 alias c:='cd /mnt/c'
 alias d:='cd /mnt/d'
