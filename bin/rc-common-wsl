@@ -1,4 +1,4 @@
-wsl/bin/rc-common-wsl
+# Hey Emacs, this is a -*- sh -*- file ...
 
 # Aliases for WSL.
 alias c:='cd /mnt/c'
