@@ -1,5 +1,10 @@
 # Hey Emacs, this is a -*- sh -*- file ...
 
+# Add ~/winbin to PATH if not already present.
+if [[ ":$PATH:" != *":$HOME/winbin:"* ]]; then
+    export PATH="$HOME/winbin:$PATH";
+fi
+
 # Aliases for WSL.
 alias c:='cd /mnt/c'
 alias d:='cd /mnt/d'
