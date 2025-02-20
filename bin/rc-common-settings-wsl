@@ -7,11 +7,19 @@ fi
 
 # WSL-specific aliases for drive navigation and Windows integration.
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
+    # Access drives.
     alias c:='cd /mnt/c 2> /dev/null || printf "Drive C: not mounted\n"'
     alias d:='cd /mnt/d 2> /dev/null || printf "Drive D: not mounted\n"'
     alias e:='cd /mnt/e 2> /dev/null || printf "Drive E: not mounted\n"'
     alias f:='cd /mnt/f 2> /dev/null || printf "Drive F: not mounted\n"'
+
+    # Open Windows File Explorer.
     alias explorer='explorer.exe .'
+
+    # Open files/URLs with Windows defaults.
+    alias open='explorer.exe'
+    alias xdg-open='explorer.exe'
+
     alias cmd='cmd.exe /C'
     alias powershell='powershell.exe -NoLogo'
 fi
