@@ -1,25 +1,27 @@
-# Hey Emacs, this is a -*- sh -*- file ...
+#!/usr/bin/env bash
 
-# Add ~/winbin to PATH if not already present.
-if [[ ":$PATH:" != *":$HOME/winbin:"* ]]; then
+# Ensure ~/winbin is in the PATH.
+if [ -d "$HOME/winbin" ] && [[ ":$PATH:" != *":$HOME/winbin:"* ]]; then
     export PATH="$HOME/winbin:$PATH"
 fi
 
 # WSL-specific aliases for drive navigation and Windows integration.
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
     # Access drives.
-    alias c:='cd /mnt/c 2> /dev/null || printf "Drive C: not mounted\n"'
-    alias d:='cd /mnt/d 2> /dev/null || printf "Drive D: not mounted\n"'
-    alias e:='cd /mnt/e 2> /dev/null || printf "Drive E: not mounted\n"'
-    alias f:='cd /mnt/f 2> /dev/null || printf "Drive F: not mounted\n"'
+    for d in {c..z}; do
+        [ -d "/mnt/$d" ] || continue
+        alias "${d}:"="cd /mnt/$d 2>/dev/null || printf >&2 \"ERROR: Drive ${d^^}: not mounted\n\""
+    done
 
     # Open Windows File Explorer.
-    alias explorer='explorer.exe .'
+    explorer() { explorer.exe "$@"; }
 
     # Open files/URLs with Windows defaults.
-    alias open='explorer.exe'
-    alias xdg-open='explorer.exe'
+    if command -v explorer.exe &> /dev/null; then
+        open() { explorer.exe "$@"; }
+        xdg-open() { explorer.exe "$@"; }
+    fi
 
-    alias cmd='cmd.exe /C'
+    cmd() { cmd.exe /C "$@"; }
     alias powershell='powershell.exe -NoLogo'
 fi
