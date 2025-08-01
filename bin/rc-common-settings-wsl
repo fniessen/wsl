@@ -8,7 +8,7 @@ fi
 
 # Exit early if not running under WSL.
 if [[ -z "$WSL_DISTRO_NAME" ]]; then
-    return 1
+    return 0                            # Skip this script silently.
 fi
 
 # Create aliases for mounted drives (e.g., cdrive for /mnt/c).
