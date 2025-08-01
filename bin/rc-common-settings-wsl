@@ -1,6 +1,7 @@
-#!/usr/bin/env bash
+# Hey Emacs, this is a -*- sh -*- file ...
+# NOTE: This file is meant to be sourced (e.g. from .bashrc or .zshrc)
 
-# Ensure ~/winbin is in the PATH.
+# Ensure $HOME/winbin is in the PATH.
 if [ -d "$HOME/winbin" ] && [[ ":$PATH:" != *":$HOME/winbin:"* ]]; then
     export PATH="$HOME/winbin:$PATH"
 fi
@@ -14,12 +15,17 @@ if [[ -n "$WSL_DISTRO_NAME" ]]; then
     done
 
     # Open Windows File Explorer.
-    explorer() { explorer.exe "$@"; }
+    explorer() {
+        local path="$1"
+        # Convert WSL path to Windows path, e.g., /mnt/c/... -> C:\...
+        path=$(echo "$path" | sed 's|^/mnt/\([a-z]\)/|\1:\\|; s|/|\\|g')
+        explorer.exe "$path"
+    }
 
     # Open files/URLs with Windows defaults.
     if command -v explorer.exe &> /dev/null; then
-        open() { explorer.exe "$@"; }
-        xdg-open() { explorer.exe "$@"; }
+        open() { explorer "$@"; }
+        xdg-open() { explorer "$@"; }
     fi
 
     cmd() { cmd.exe /C "$@"; }
