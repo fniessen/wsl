@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-# Check if 'docopts' command is available.
+# Check if the 'docopts' command is available, considering the '.exe' extension.
 if ! command -v docopts.exe > /dev/null 2>&1; then
     printf >&2 'Error: docopts.exe command not found.\n'
     exit 2
 fi
 
+# Call it (with the '.exe' extension in the command).
 docopts.exe "$@"

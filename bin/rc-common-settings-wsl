@@ -16,7 +16,7 @@ for d in {c..z}; do
     mountpoint="/mnt/$d"
     [[ -d "$mountpoint" ]] || continue
     upper_d=$(printf "%s" "$d" | tr '[:lower:]' '[:upper:]')
-    alias "${d}:"="cd $mountpoint 2> /dev/null || printf >&2 \"ERROR: Drive $upper_d: not mounted or inaccessible\n\""
+    alias "${d}:"="cd $mountpoint 2> /dev/null || printf >&2 \"ERROR: Drive $upper_d: inaccessible\n\""
 done
 
 # Open Windows File Explorer with path conversion.
